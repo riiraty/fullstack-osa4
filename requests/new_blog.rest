@@ -2,8 +2,7 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-  "title": "Will it work after refactoring?",
-  "author": "Scared Developer",
+  "author": "nOOb Developer",
   "url": "url.sushi",
-  "likes": 26
+  "likes": 404
 }
