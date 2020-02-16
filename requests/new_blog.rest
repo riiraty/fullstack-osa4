@@ -2,7 +2,8 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-  "author": "nOOb Developer",
-  "url": "url.sushi",
-  "likes": 404
+  "title": "If userId is not defined?",
+  "author": "It Be Me",
+  "url": "url.marshmallow",
+  "likes": 13
 }
