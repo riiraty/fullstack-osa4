@@ -58,9 +58,18 @@ const mostBlogs = (blogs) => {
     : mostBlogs
 }
 
+const mostLikes = (blogs) => {
+  const mostLiked = {
+    author: 'Mikki Hiiri',
+    likes: 42
+  }
+  return mostLiked
+}
+
 module.exports = {
   dummy,
   totalLikes,
   favoriteBlog,
-  mostBlogs
+  mostBlogs,
+  mostLikes
 }
