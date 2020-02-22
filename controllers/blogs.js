@@ -48,33 +48,45 @@ blogsRouter.post('/', async (request, response) => {
 blogsRouter.delete('/:id', async (request, response) => {
   const decodedToken = jwt.verify(request.token, process.env.SECRET)
   const deleterId = decodedToken.id.toString()
+  const deleter = await User.findById(deleterId)
 
   const blog = await Blog.findById(request.params.id)
   const saverId = blog.user.toString()
 
   if (deleterId === saverId) {
     await Blog.findByIdAndRemove(request.params.id)
+    deleter.blogs = deleter.blogs.filter(b => b.id.toString() !== request.params.id.toString())
+    await deleter.save()
     response.status(204).end()
+  } else {
+    return response.status(401).json({ error: 'only the creator can delete blogs' })
   }
 
 })
 
 blogsRouter.put('/:id', async (request, response) => {
-  const body = request.body
+  const blog = request.body
 
-  const updated = {
-    title: body.title,
-    author: body.author,
-    url: body.url,
-    likes: body.likes
-  }
-
-  const updatedBlog = await Blog.findByIdAndUpdate(
-    request.params.id,
-    updated,
-    { new: true }
-  )
-  response.json(updatedBlog.toJSON)
+  const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, { new: true })
+  response.json(updatedBlog.toJSON())
 })
+
+// blogsRouter.put('/:id', async (request, response) => {
+//   const body = request.body
+
+//   const updated = {
+//     title: body.title,
+//     author: body.author,
+//     url: body.url,
+//     likes: body.likes
+//   }
+
+//   const updatedBlog = await Blog.findByIdAndUpdate(
+//     request.params.id,
+//     updated,
+//     { new: true }
+//   )
+//   response.json(updatedBlog.toJSON)
+// })
 
 module.exports = blogsRouter
