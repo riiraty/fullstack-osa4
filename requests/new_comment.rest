@@ -1,0 +1,10 @@
+POST http://localhost:3003/api/blogs/5e6e16293055704ac7cf2151/comments
+Content-Type: application/json
+
+{
+  "title": "This blog is going to have comments",
+  "author": "Dr. Korona",
+  "url": "url.net",
+  "likes": 404,
+  "comments": ["here is comment", "second comment comes here"]
+}
